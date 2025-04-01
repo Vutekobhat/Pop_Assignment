@@ -18,7 +18,7 @@ public class Login {
     public Login(Stage stage) {
         this.stage = stage;
     }
-
+    //Grid plane initiated
     public void show() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -27,6 +27,7 @@ public class Login {
         grid.setPadding(new Insets(30)); // Increased padding
         grid.setStyle("-fx-background-color: #f0f0f0;");
 
+        //Label and TextField
         Label titleLabel = new Label("Login");
         titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;"); // Increased font size
         grid.add(titleLabel, 0, 0, 2, 1);
@@ -47,6 +48,7 @@ public class Login {
         grid.add(passwordLabel, 0, 2);
         grid.add(passwordField, 1, 2);
 
+        //Button
         Button loginButton = new Button("Login");
         loginButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
         loginButton.setPrefWidth(150); // Increased button size
