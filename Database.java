@@ -13,10 +13,11 @@ public class Database {
     public static Connection getConnection() throws SQLException {                                                                                          
         return DriverManager.getConnection(URL, USER, PASSWORD);                                                                                            
     }                                                                                                                                                       
-                                                                                                                                                            
+       //Database initialized                                                                                                                                  
     public static void initializeDatabase() {                                                                                                               
         try (Connection conn = getConnection();                                                                                                             
-             Statement stmt = conn.createStatement()) {                                                                                                     
+             Statement stmt = conn.createStatement()) { 
+        	//UserTable initialized
             String usersTable = "CREATE TABLE IF NOT EXISTS users (" +                                                                                      
                     "id INT PRIMARY KEY AUTO_INCREMENT, " +                                                                                                 
                     "full_name VARCHAR(255) NOT NULL, " +                                                                                                   
@@ -27,7 +28,8 @@ public class Database {
                     "profile_picture VARCHAR(255), " +                                                                                                      
                     "expense_limit DOUBLE DEFAULT NULL)"; // Added expense_limit column                                                                     
             stmt.execute(usersTable);                                                                                                                       
-                                                                                                                                                            
+                               
+          //TransactionsTable initialized
             String transactionsTable = "CREATE TABLE IF NOT EXISTS transactions (" +                                                                        
                     "id INT PRIMARY KEY AUTO_INCREMENT, " +                                                                                                 
                     "user_id INT NOT NULL, " +                                                                                                              
