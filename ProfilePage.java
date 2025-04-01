@@ -25,7 +25,7 @@ public class ProfilePage {
         this.stage = stage;
         this.username = username;
     }
-
+    	//GridPane used for aligning elements
     public void show() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -33,6 +33,7 @@ public class ProfilePage {
         grid.setVgap(15);
         grid.setPadding(new Insets(30));
 
+        //Label and Buttons
         Label titleLabel = new Label("Profile");
         titleLabel.getStyleClass().add("title-label");
         grid.add(titleLabel, 0, 0, 2, 1);
@@ -79,6 +80,7 @@ public class ProfilePage {
 
         loadUserData(fullNameField, emailField, phoneField);
 
+        //giving function to buttons
         uploadButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Profile Picture");
@@ -130,7 +132,7 @@ public class ProfilePage {
         stage.setMaximized(true);
         stage.show();
     }
-
+    	//Input validation
     private boolean validateInput(String fullName, String email, String phone) {
         if (fullName.isEmpty() || email.isEmpty()) {
             return false;
@@ -143,7 +145,7 @@ public class ProfilePage {
         }
         return true;
     }
-
+    	//Loading data form user
     private void loadUserData(TextField fullNameField, TextField emailField, TextField phoneField) {
         String sql = "SELECT full_name, email, phone_number, profile_picture FROM users WHERE username = ?";
         try (Connection conn = Database.getConnection();
@@ -167,7 +169,7 @@ public class ProfilePage {
             e.printStackTrace();
         }
     }
-
+    //Profile updating
     private boolean updateProfile(String fullName, String email, String phone) {
         String sql = "UPDATE users SET full_name = ?, email = ?, phone_number = ? WHERE username = ?";
         try (Connection conn = Database.getConnection();
