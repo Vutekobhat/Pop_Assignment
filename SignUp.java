@@ -18,6 +18,7 @@ public class SignUp {
         this.stage = stage;
     }
 
+    //Pane and window alingment
     public void show() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -26,6 +27,7 @@ public class SignUp {
         grid.setPadding(new Insets(30));
         grid.setStyle("-fx-background-color: #f0f0f0;");
 
+        //Label and title
         Label titleLabel = new Label("Sign Up");
         titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
         grid.add(titleLabel, 0, 0, 2, 1);
@@ -58,6 +60,7 @@ public class SignUp {
         grid.add(passwordLabel, 0, 4);
         grid.add(passwordField, 1, 4);
 
+        //Button
         Button registerButton = new Button("Register");
         registerButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
         registerButton.setPrefWidth(150);
@@ -71,6 +74,7 @@ public class SignUp {
         statusLabel.setStyle("-fx-font-size: 16px;");
         grid.add(statusLabel, 1, 7);
 
+        //action to Button
         registerButton.setOnAction(e -> {
             String fullName = fullNameField.getText().trim();
             String username = usernameField.getText().trim();
@@ -92,11 +96,13 @@ public class SignUp {
             }
         });
 
+        
         backButton.setOnAction(e -> {
             Login login = new Login(stage);
             login.show();
         });
 
+        //Scene
         Scene scene = new Scene(grid);
         stage.setScene(scene);
         stage.setTitle("Sign Up");
@@ -117,6 +123,7 @@ public class SignUp {
         return true;
     }
 
+    //User register
     private boolean registerUser(String fullName, String username, String email, String password) {
         String sql = "INSERT INTO users (full_name, username, email, password) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
