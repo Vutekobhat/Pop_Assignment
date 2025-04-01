@@ -27,7 +27,8 @@ public class Transactions {
         private final String source;
         private final String date;
 
-        public TransactionEntry(int id, String type, double amount, String description, String source, String date) {
+        public TransactionEntry(int id, String type, double amount, String description, String source, String date)
+        {
             this.id = id;
             this.type = type;
             this.amount = amount;
@@ -36,6 +37,7 @@ public class Transactions {
             this.date = date;
         }
 
+        //Elements introduced
         public int getId() { return id; }
         public String getType() { return type; }
         public double getAmount() { return amount; }
@@ -48,12 +50,14 @@ public class Transactions {
         this.stage = stage;
         this.username = username;
     }
-
+    
+    //Window alignment
     public void show() {
         VBox root = new VBox(15);
         root.setPadding(new Insets(30));
         root.setStyle("-fx-background-color: #f0f0f0;");
 
+        //Label and Title
         Label titleLabel = new Label("Transactions");
         titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
 
@@ -63,6 +67,7 @@ public class Transactions {
         typeCombo.setStyle("-fx-font-size: 16px;");
         typeCombo.setPrefWidth(200);
 
+        //TextField
         TextField amountField = new TextField();
         amountField.setPromptText("Amount");
         amountField.setStyle("-fx-font-size: 16px;");
@@ -78,16 +83,19 @@ public class Transactions {
         sourceField.setStyle("-fx-font-size: 16px;");
         sourceField.setPrefWidth(200);
 
+        //Date picker
         DatePicker datePicker = new DatePicker(LocalDate.now());
         datePicker.setStyle("-fx-font-size: 16px;");
         datePicker.setPrefWidth(200);
 
+        //Button
         Button addButton = new Button("Add Transaction");
         addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
         addButton.setPrefWidth(200);
         Label statusLabel = new Label();
         statusLabel.setStyle("-fx-font-size: 16px;");
 
+        //Transaction Table
         transactionTable = new TableView<>();
         TableColumn<TransactionEntry, Integer> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -110,14 +118,17 @@ public class Transactions {
         transactionTable.getColumns().addAll(idCol, typeCol, amountCol, descCol, sourceCol, dateCol);
         transactionTable.setPrefHeight(500); // Increased height for larger screen
 
+        //Scroll bar
         ScrollPane scrollPane = new ScrollPane(transactionTable);
         scrollPane.setFitToWidth(true);
         scrollPane.setPrefHeight(520);
 
+        //Button
         Button backButton = new Button("Back");
         backButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 16px;");
         backButton.setPrefWidth(200);
 
+        //Giving action to button
         addButton.setOnAction(e -> {
             try {
                 double amount = Double.parseDouble(amountField.getText().trim());
@@ -164,7 +175,9 @@ public class Transactions {
 
         loadTransactions();
     }
-
+    
+    
+    //Transaction
     private void addTransaction(String type, double amount, String description, String source, LocalDate date) {
         String sql = "INSERT INTO transactions (user_id, type, amount, description, source, date) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
@@ -203,6 +216,7 @@ public class Transactions {
         }
     }
 
+    //User
     private int getUserId(Connection conn) throws SQLException {
         String sql = "SELECT id FROM users WHERE username = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
