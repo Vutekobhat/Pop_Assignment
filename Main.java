@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        Database.initializeDatabase();
-        Login login = new Login(primaryStage);
+        Database.initializeDatabase(); //Database initialized
+        Login login = new Login(primaryStage);//Login introduced
         login.show();
     }
 
@@ -16,4 +16,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
