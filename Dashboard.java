@@ -24,10 +24,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Dashboard {
     private Stage stage;
-    private String username;
-    private Label balanceLabel;
-    private Label incomeLabel;
-    private Label expenseLabel;
+    private String username; //username introduced
+    private Label balanceLabel; //balance introduced
+    private Label incomeLabel; //income introduced
+    private Label expenseLabel; //expense introduced
     private Label warningLabel; // Added for expense limit warning
 
     public Dashboard(Stage stage, String username) {
@@ -36,11 +36,12 @@ public class Dashboard {
     }
 
     public void show() {
-        VBox root = new VBox(20);
+        VBox root = new VBox(20); //Vbox introduced to maintain size and color
         root.setPadding(new Insets(30));
         root.setStyle("-fx-background-color: #f0f0f0;");
 
-        MenuBar menuBar = new MenuBar();
+        //Creating Menu bar and assigning items
+        MenuBar menuBar = new MenuBar(); 
         Menu menu = new Menu("Menu");
         menu.setStyle("-fx-font-size: 16px;");
         MenuItem profileItem = new MenuItem("Profile");
@@ -53,6 +54,7 @@ public class Dashboard {
         Label welcomeLabel = new Label("Welcome, " + username + "!");
         welcomeLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
 
+        //Hbox introduced for alignment 
         HBox summaryBox = new HBox(50);
         summaryBox.setAlignment(Pos.CENTER);
         summaryBox.setPadding(new Insets(20));
@@ -70,6 +72,7 @@ public class Dashboard {
         warningLabel = new Label();
         warningLabel.setStyle("-fx-font-size: 16px;");
 
+        //Creating bar chart and aligning them 
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Month");
@@ -82,6 +85,7 @@ public class Dashboard {
         updateSummary();
         updateChart(barChart);
 
+        //Giving function to items on Menu bar
         profileItem.setOnAction(e -> {
             ProfilePage profilePage = new ProfilePage(stage, username);
             profilePage.show();
@@ -233,7 +237,6 @@ public class Dashboard {
         return -1;
     }
 }
-
 
 
 
