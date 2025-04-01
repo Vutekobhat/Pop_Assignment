@@ -20,7 +20,7 @@ public class Settings {
         this.stage = stage;
         this.username = username;
     }
-
+    //Window alignment
     public void show() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -29,6 +29,7 @@ public class Settings {
         grid.setPadding(new Insets(30));
         grid.setStyle("-fx-background-color: #f0f0f0;");
 
+        //Label and title
         Label titleLabel = new Label("Settings");
         titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
         grid.add(titleLabel, 0, 0, 2, 1);
@@ -57,7 +58,7 @@ public class Settings {
         grid.add(confirmPasswordLabel, 0, 3);
         grid.add(confirmPasswordField, 1, 3);
 
-        // Add expense limit input field
+        // Adding expense limit input field
         Label expenseLimitLabel = new Label("Monthly Expense Limit:");
         expenseLimitLabel.setStyle("-fx-font-size: 18px;");
         TextField expenseLimitField = new TextField();
@@ -67,6 +68,7 @@ public class Settings {
         grid.add(expenseLimitLabel, 0, 4);
         grid.add(expenseLimitField, 1, 4);
 
+        //Button
         Button changePasswordButton = new Button("Change Password");
         changePasswordButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
         changePasswordButton.setPrefWidth(150);
@@ -87,6 +89,7 @@ public class Settings {
         // Load the current expense limit (if set)
         loadExpenseLimit(expenseLimitField);
 
+        //Giving action to buttons
         changePasswordButton.setOnAction(e -> {
             String currentPassword = currentPasswordField.getText();
             String newPassword = newPasswordField.getText();
@@ -149,6 +152,9 @@ public class Settings {
             dashboard.show();
         });
 
+    
+        
+        //Scene
         Scene scene = new Scene(grid);
         // Load stylesheet with error handling
         String stylesheet = getClass().getResource("/resources/styles.css") != null ? 
@@ -181,6 +187,7 @@ public class Settings {
         }
     }
 
+    //Expense limit
     private void updateExpenseLimit(Double limit) {
         String sql = "UPDATE users SET expense_limit = ? WHERE username = ?";
         try (Connection conn = Database.getConnection();
@@ -197,6 +204,7 @@ public class Settings {
         }
     }
 
+    //Changing password
     private boolean changePassword(String currentPassword, String newPassword) {
         String sqlCheck = "SELECT password FROM users WHERE username = ? AND password = ?";
         String sqlUpdate = "UPDATE users SET password = ? WHERE username = ?";
